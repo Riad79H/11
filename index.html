@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Just For You</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      overflow: hidden;
+      background: linear-gradient(to top, #fceabb, #f8b500);
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .flower {
+      width: 30px;
+      height: 30px;
+      background: radial-gradient(circle, pink, deeppink);
+      border-radius: 50%;
+      position: absolute;
+      bottom: 50px;
+      animation: grow 3s ease-out forwards;
+    }
+
+    @keyframes grow {
+      0% { transform: scale(0); bottom: 0; }
+      100% { transform: scale(3); bottom: 50px; }
+    }
+
+    .falling-flower {
+      position: absolute;
+      top: -50px;
+      width: 20px;
+      height: 20px;
+      background: radial-gradient(circle, pink, deeppink);
+      border-radius: 50%;
+      animation: fall 5s linear forwards;
+    }
+
+    @keyframes fall {
+      to {
+        transform: translateY(110vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+    .message {
+      position: absolute;
+      top: 40%;
+      width: 100%;
+      text-align: center;
+      font-size: 2rem;
+      color: white;
+      text-shadow: 2px 2px 4px #000;
+      opacity: 0;
+      animation: showText 1s ease-in-out forwards;
+      animation-delay: 2s;
+    }
+
+    @keyframes showText {
+      to {
+        opacity: 1;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="flower" id="mainFlower"></div>
+
+  <script>
+    const mainFlower = document.getElementById('mainFlower');
+    mainFlower.addEventListener('click', () => {
+      for (let i = 0; i < 30; i++) {
+        const flower = document.createElement('div');
+        flower.classList.add('falling-flower');
+        flower.style.left = Math.random() * 100 + 'vw';
+        flower.style.animationDuration = 2 + Math.random() * 3 + 's';
+        document.body.appendChild(flower);
+        setTimeout(() => flower.remove(), 6000);
+      }
+
+      const message = document.createElement('div');
+      message.classList.add('message');
+      message.textContent = 'Ful gula sob just tomar jonno 💐';
+      document.body.appendChild(message);
+    });
+  </script>
+</body>
+</html>
